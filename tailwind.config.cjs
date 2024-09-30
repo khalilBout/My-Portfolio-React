@@ -6,6 +6,8 @@ module.exports = {
       Poppins: "Poppins",
       Paprika: "Paprika",
       Inria: "Inria Serif",
+      titleAr: ["Noto Kufi Arabic", "sans-serif"],
+      titleAr2: ["Marhey", "sans-serif"],
     },
     container: {
       center: true,

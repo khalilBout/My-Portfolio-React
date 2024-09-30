@@ -1,11 +1,37 @@
 import { createElement, useRef } from "react";
-import { content } from "../Content";
 import emailjs from "@emailjs/browser";
 import toast, { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import cookies from "js-cookie";
+import logo from "../assets/images/Contact/logo.png";
+
+// icons
+import { GrMail } from "react-icons/gr";
+import { MdCall } from "react-icons/md";
+import { BsInstagram } from "react-icons/bs";
+
+const social_media_data = [
+  {
+    text: "codeaprogram@gmail.com",
+    icon: GrMail,
+    link: "mailto:codeaprogram@gmail.com",
+  },
+  {
+    text: "+91 1234 56778",
+    icon: MdCall,
+    link: "https://wa.me/1234567890",
+  },
+  {
+    text: "codeaprogram",
+    icon: BsInstagram,
+    link: "https://www.instagram.com/codeaprogram/",
+  },
+];
 
 const Contact = () => {
-  const { Contact } = content;
   const form = useRef();
+  const lng = cookies.get("i18next") || "en";
+  const { t } = useTranslation();
 
   // Sending Email
   const sendEmail = (e) => {
@@ -37,11 +63,21 @@ const Contact = () => {
     <section className="bg-dark_primary text-white" id="contact">
       <Toaster />
       <div className="md:container px-5 py-14">
-        <h2 className="title !text-white" data-aos="fade-down">
-          {Contact.title}
+        <h2
+          className={
+            lng === "ar"
+              ? "font-titleAr2 title !text-white"
+              : "title !text-white"
+          }
+          data-aos="fade-down"
+        >
+          {t("contact.title")}
         </h2>
-        <h4 className="subtitle" data-aos="fade-down">
-          {Contact.subtitle}
+        <h4
+          className={lng === "ar" ? "font-titleAr2 subtitle" : "subtitle"}
+          data-aos="fade-down"
+        >
+          {t("contact.subTitle")}
         </h4>
         <br />
         <div className="flex gap-10 md:flex-row flex-col">
@@ -49,39 +85,58 @@ const Contact = () => {
             ref={form}
             onSubmit={sendEmail}
             data-aos="fade-up"
-            className="flex-1 flex flex-col gap-5"
+            className={
+              lng === "ar"
+                ? "font-titleAr2 flex-1 flex flex-col gap-5"
+                : "flex-1 flex flex-col gap-5"
+            }
           >
             {/* Input Name as same as email js templates values */}
             <input
               type="text"
               name="from_name"
-              placeholder="Name"
+              placeholder={lng === "ar" ? "الإسم" : "Name"}
               required
-              className="border border-slate-600 p-3 rounded"
+              className={
+                lng === "ar"
+                  ? "font-titleAr2 border border-slate-600 p-3 rounded"
+                  : "border border-slate-600 p-3 rounded"
+              }
             />
             <input
               type="email"
               name="user_email"
               pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-              placeholder="Email Id"
+              placeholder={lng === "ar" ? "الإيمايل" : "Email"}
               required
-              className="border border-slate-600 p-3 rounded"
+              className={
+                lng === "ar"
+                  ? "font-titleAr2 border border-slate-600 p-3 rounded"
+                  : "border border-slate-600 p-3 rounded"
+              }
             />
             <textarea
               name="message"
-              placeholder="Message"
-              className="border border-slate-600 p-3 rounded h-44"
+              placeholder={lng === "ar" ? "الرسالة " : "Message"}
+              className={
+                lng === "ar"
+                  ? "font-titleAr2 border border-slate-600 p-3 rounded h-44"
+                  : "border border-slate-600 p-3 rounded h-44 "
+              }
               required
             ></textarea>
             <button
-              className="btn self-start
-            bg-white text-dark_primary"
+              className={
+                lng === "ar"
+                  ? "font-titleAr2 btn self-start bg-white text-dark_primary"
+                  : "btn self-start bg-white text-dark_primary "
+              }
             >
-              Submit
+              {t("contact.btnSubmit")}
             </button>
           </form>
-          <div className="flex-1 flex flex-col gap-5">
-            {Contact.social_media.map((content, i) => (
+          <div dir="ltr" className="flex-1 flex flex-col gap-5">
+            {social_media_data.map((content, i) => (
               <div
                 key={i}
                 data-aos="fade-down"
@@ -95,7 +150,7 @@ const Contact = () => {
               </div>
             ))}
             <div className="w-[160px] h-[160px] mx-auto">
-              <img src={Contact.imgLogo} alt="logo" />
+              <img src={logo} alt="logo" />
             </div>
           </div>
         </div>
