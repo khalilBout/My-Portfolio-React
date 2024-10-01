@@ -74,7 +74,7 @@ const Navbar = () => {
               <IoLanguageOutline size={16} />
               <ul className=" gap-2 px-2 hidden group-hover:flex transition-all duration-200">
                 {/* {leng.map((item, ind) => ( */}
-                <li className=" rounded-full bg-green-100 hover:bg-green-200 duration-200 cursor-pointer w-7 h-7 flex justify-center items-center">
+                <li className=" rounded-full bg-green-100 hover:bg-green-200 duration-300 cursor-pointer w-7 h-7 flex justify-center items-center">
                   <button
                     onClick={() => {
                       i18n.changeLanguage("ar");
